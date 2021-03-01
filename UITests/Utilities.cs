@@ -1,12 +1,25 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Text;
+using System.Threading;
+using UITests.Pages.Authorization;
 
 namespace UITests
 {
     public static class Utilities
     {
         public static string BaseUrl { get; set; }
+        public static string TestUserEmail = "admin@mail.ru";
+        public static string TestUserPassword = "12345678";
+
+        public static void Login(BaseDriver driver)
+        {
+            AuthorizationPage page = new AuthorizationPage(driver);
+            page.OpenPage();
+            page.LogIn(TestUserEmail, TestUserPassword);
+            Thread.Sleep(2000);
+        }
 
         public static string GenerateNumbers(int count)
         {

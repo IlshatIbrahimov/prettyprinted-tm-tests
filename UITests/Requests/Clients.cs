@@ -28,7 +28,7 @@ namespace UITests.Requests
         
         public static void AddAuthorizationToken(RestRequest request)
         {
-            request.AddHeader("Authorization", UserToken);
+            request.AddHeader("Authorization", $"Bearer {UserToken}");
         }
     }
 }
