@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace UITests.Pages.Authorization
 {
@@ -21,6 +22,7 @@ namespace UITests.Pages.Authorization
 
         public void OpenRegistrationForm()
         {
+            OpenPage();
             Driver.Click(switchToRegistrationButton);
         }
 
@@ -37,7 +39,15 @@ namespace UITests.Pages.Authorization
             Driver.FillField(registerSurnameField, surname);
             Driver.FillField(emailField, email);
             Driver.FillField(passwordField, password);
+            Driver.FillField(registerPasswordConfirmField, password);
             Driver.Click(registerButton);
+        }
+
+        public void AssertErrorContains(string message)
+        {
+            By xpath = Utilities.ConcatXPath(authErrorMessage, $"//p[contains(text(), '{message}')]");
+
+            Assert.True(Driver.GetElementsCount(xpath) > 0);
         }
     }
 }
