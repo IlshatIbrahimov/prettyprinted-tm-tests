@@ -1,1 +1,1 @@
-﻿https://prettyprinted-tm-frontend.herokuapp.com/
+﻿https://prettyprinted-tm-frontend.herokuapp.com
