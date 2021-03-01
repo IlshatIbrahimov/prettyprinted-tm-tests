@@ -14,7 +14,9 @@ namespace UITests
     public class BaseDriver
     {
         private IWebDriver driver;
-        private string remoteWdUri = "http://localhost:4444/";
+        // при использовании Docker Toolbox Selenoid запускается на 192.168.99.100:4444
+        // при использовании Docker for Windows Selenoid запускается на localhost:4444
+        private string remoteWdUri = "http://192.168.99.100:4444/";
 
         public BaseDriver()
         {

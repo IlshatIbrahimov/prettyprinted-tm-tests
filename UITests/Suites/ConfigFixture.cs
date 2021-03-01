@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using System.IO;
+using UITests.Requests;
 
 namespace UITests.Suites
 {
@@ -9,6 +10,8 @@ namespace UITests.Suites
         [OneTimeSetUp]
         public void SetUp()
         {
+            Clients.Init();
+
             Utilities.BaseUrl = File.ReadAllText("../../../InputData/StandUrl.txt");
 
             DirectoryInfo di = Directory.CreateDirectory("../../../results");

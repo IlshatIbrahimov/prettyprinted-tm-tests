@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace UITests.Pages
 {
@@ -21,6 +22,11 @@ namespace UITests.Pages
         public bool HasLocator(By locator)
         {
             return Driver.GetElementsCount(locator) > 0;
+        }
+
+        public void AssertHasLocator(By locator)
+        {
+            Assert.True(HasLocator(locator), $"Element '{locator}' not found!");
         }
     }
 }
