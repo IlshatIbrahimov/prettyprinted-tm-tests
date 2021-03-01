@@ -1,0 +1,6 @@
+{
+  "allure": {
+    "directory": "../../../results",
+    "logging":  true
+  }
+}
