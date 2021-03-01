@@ -24,5 +24,24 @@ namespace UITests.Requests
 
             Clients.BackendClient.Execute(request);
         }
+
+        public static JObject GetProjectInfo(string projectName)
+        {
+            RestRequest request = new RestRequest("/project", Method.GET);
+            AuthorizationRequests.LoginUser(Utilities.TestUserEmail, Utilities.TestUserPassword);
+            Clients.AddAuthorizationToken(request);
+
+            var response = Clients.BackendClient.Execute(request);
+
+            JArray responseJArray = JArray.Parse(response.Content);
+            return responseJArray.Children<JObject>()
+                .FirstOrDefault(o => o["name"].ToString() == projectName);
+        }
+
+        public static int GetProjectId(string projectName)
+        {
+            var info = GetProjectInfo(projectName);
+            return info["id"].Value<int>();
+        }
     }
 }

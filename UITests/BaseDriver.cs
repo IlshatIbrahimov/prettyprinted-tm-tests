@@ -159,6 +159,18 @@ namespace UITests
             return element;
         }
 
+        public IWebElement ClickByExecutingJavascript(IWebElement element)
+        {
+            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].click", element);
+            return element;
+        }
+
+        public IWebElement ClickByExecutingJavascript(By locator)
+        {
+            var element = GetElement(locator);
+            return ClickByExecutingJavascript(element);
+        }
+
         public IWebElement FillField(By locator, string value, bool pressEnter = false, int secondsToWait = 10)
         {
             try
