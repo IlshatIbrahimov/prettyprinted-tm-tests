@@ -12,6 +12,7 @@ namespace UITests.Pages
     {
         public readonly By addProjectButton = By.XPath("//button[text()='Add project ']");
         public readonly By projectsListItem = By.XPath("//ul[@class='sidebar__list sidebar__list--project scroll']//li//a");
+        public readonly By pageTitle = By.XPath("//h1[@class='header__title']");
 
         public MainPage(BaseDriver baseDriver) : base(baseDriver, "")
         {
@@ -25,12 +26,26 @@ namespace UITests.Pages
             Driver.Click(By.XPath("//button[text()='Create ']"));
         }
 
+        public void GoToProject(string projectName)
+        {
+            By xpath = Utilities.ConcatXPath(projectsListItem, $"[text()='{projectName} ']");
+
+            Driver.Click(xpath);
+        }
+
         public void AssertProjectExists(string projectName)
         {
             var projects = Driver.GetElements(projectsListItem);
 
             bool isContains = projects.Any(p => p.Text.Equals(projectName));
             Assert.True(isContains);
+        }
+
+        public void AssertTitleContains(string text)
+        {
+            By xpath = Utilities.ConcatXPath(pageTitle, $"[contains(text(), '{text}')]");
+
+            Assert.True(Driver.GetElementsCount(xpath) > 0);
         }
     }
 }

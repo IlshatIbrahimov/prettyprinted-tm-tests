@@ -10,6 +10,23 @@ namespace UITests.Requests
 {
     public static class AuthorizationRequests
     {
+        public static void LoginUser(string email, string password)
+        {
+            RestRequest request = new RestRequest("/auth", Method.POST);
+
+            JObject requestJObject = new JObject();
+            requestJObject.Add("email", email);
+            requestJObject.Add("password", password);
+
+            request.RequestFormat = DataFormat.Json;
+            request.AddParameter("application/json", requestJObject, ParameterType.RequestBody);
+
+            var response = Clients.BackendClient.Execute(request);
+
+            JObject responseJObject = JObject.Parse(response.Content);
+            Clients.UserToken = responseJObject["jwt"].Value<String>();
+        }
+
         public static void RegisterUser(string name, string surname, string email, string password)
         {
             RestRequest request = new RestRequest("/register", Method.POST);

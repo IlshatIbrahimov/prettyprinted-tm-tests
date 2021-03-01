@@ -4,6 +4,7 @@ using NUnit.Framework;
 using System;
 using System.Threading;
 using UITests.Pages;
+using UITests.Requests;
 
 namespace UITests.Suites.Projects
 {
@@ -18,6 +19,7 @@ namespace UITests.Suites.Projects
     {
         private MainPage page;
         private string projectName;
+        private string requestProjectName;
 
         [OneTimeSetUp]
         public override void SetUp()
@@ -25,6 +27,10 @@ namespace UITests.Suites.Projects
             base.SetUp();
             page = new MainPage(fixture.Driver);
             Utilities.Login(fixture.Driver);
+
+            // подготовка тестовых данных
+            requestProjectName = "Autotest project request " + DateTime.Now;
+            ProjectsRequests.CreateProject(requestProjectName);
         }
 
         [TestCase(Description = "Создание проекта (Успех)")]
@@ -38,6 +44,15 @@ namespace UITests.Suites.Projects
             Thread.Sleep(2000);
 
             page.AssertProjectExists(projectName);
+        }
+
+        [TestCase(Description = "Переход к созданному проекту")]
+        public void NavigateToProject()
+        {
+            page.OpenPage();
+            page.GoToProject(requestProjectName);
+
+            page.AssertTitleContains(requestProjectName);
         }
     }
 }
