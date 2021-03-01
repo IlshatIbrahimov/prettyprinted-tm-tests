@@ -53,7 +53,7 @@ namespace UITests.Suites.Authorization
             page.OpenPage();
             page.LogIn(email, "incorrectpassword");
 
-            page.AssertHasLocator(page.authErrorMessage);
+            page.AssertErrorContains("Wrong credentials");
         }
 
         [TestCase(Description = "Авторизация незарегистрированного пользователя (Провал)")]
@@ -62,7 +62,7 @@ namespace UITests.Suites.Authorization
             page.OpenPage();
             page.LogIn("incorrectemail" + DateTime.Now.ToString("ddMMyyyyhhmmss") + "@prettyprintedautotest.com", "incorrectpassword");
 
-            page.AssertHasLocator(page.authErrorMessage);
+            page.AssertErrorContains("Wrong credentials");
         }
     }
 }
