@@ -19,11 +19,11 @@ namespace UITests.Requests
             JObject requestJObject = new JObject();
             requestJObject.Add("assigneeId", 1);
             requestJObject.Add("content", content);
-            requestJObject.Add("priority", 0);
+            requestJObject.Add("priorityId", 0);
             requestJObject.Add("projectId", projectId);
-            requestJObject.Add("status", 0);
-            requestJObject.Add("taskName", taskName);
-            requestJObject.Add("type", 0);
+            requestJObject.Add("statusId", 0);
+            requestJObject.Add("name", taskName);
+            requestJObject.Add("typeId", 0);
 
             request.RequestFormat = DataFormat.Json;
             request.AddParameter("application/json", requestJObject, ParameterType.RequestBody);
