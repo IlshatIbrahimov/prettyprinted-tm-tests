@@ -9,7 +9,12 @@ namespace FuncTests.Requests
 {
     public class ProjectsRequests : Requests
     {
-        public void CreateProject(string projectName)
+        public ProjectsRequests() : base()
+        {
+            //Client.Authorize(Utilities.TestUserEmail, Utilities.TestUserPassword);
+        }
+
+        public JObject CreateProject(string projectName)
         {
             RestRequest request = new RestRequest("/project", Method.POST);
             Client.Authorize(Utilities.TestUserEmail, Utilities.TestUserPassword);
@@ -21,7 +26,7 @@ namespace FuncTests.Requests
             request.RequestFormat = DataFormat.Json;
             request.AddParameter("application/json", requestJObject, ParameterType.RequestBody);
 
-            Client.client.Execute(request);
+            return JObject.Parse(Client.client.Execute(request).Content);
         }
 
         public JObject GetProjectInfo(string projectName)
