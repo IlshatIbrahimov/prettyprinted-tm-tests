@@ -9,11 +9,6 @@ namespace FuncTests.Requests
 {
     public class ProjectsRequests : Requests
     {
-        public ProjectsRequests() : base()
-        {
-            //Client.Authorize(Utilities.TestUserEmail, Utilities.TestUserPassword);
-        }
-
         public JObject CreateProject(string projectName)
         {
             RestRequest request = new RestRequest("/project", Method.POST);
