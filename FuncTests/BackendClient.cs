@@ -14,7 +14,7 @@ namespace FuncTests.Requests
 
         public BackendClient()
         {
-            client = new RestClient()
+            client = new RestClient(backendUrl)
             {
                 FollowRedirects = true,
                 CookieContainer = new System.Net.CookieContainer(),
